@@ -77,5 +77,14 @@
 	}
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
+@media (min-width:750px) {
+	.page .van-tabbar,
+	.page .van-nav-bar {
+	  width: 750px;
+	  left: 0;
+	  right: 0;
+	  margin: auto;
+	}
+}
 </style>

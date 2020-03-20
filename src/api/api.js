@@ -8,6 +8,17 @@ export function getHome(data) {
     params: data
   })
 }
+
+export function getBP(data) {
+  // 获取项目列表
+  return request({
+    url: 'bp/index',
+    method: 'get',
+    params: data
+  })
+}
+
+
 export function sendSms(data) {
   // 获取验证码
   return request({
@@ -26,8 +37,52 @@ export function getArea(data) {
   })
 }
 
+export function investorList(data) {
+  // 获取投资方列表
+  return request({
+    url: 'investor/index',
+    method: 'get',
+    params: data
+  })
+}
+
+export function investorDetails(data) {
+  // 获取投资方详情
+  return request({
+    url: 'investor/info',
+    method: 'get',
+    params: data
+  })
+}
 
 export function getNews(data) {
+  // 发现新闻列表
+  return request({
+    url: 'news/getNews',
+    method: 'get',
+    params: data
+  })
+}
+
+export function findDetails(data) {
+  // 发现详情
+  return request({
+    url: 'news/info',
+    method: 'get',
+    params: data
+  })
+}
+
+export function newInc(data) {
+  // 增加浏览
+  return request({
+    url: 'news/newInc',
+    method: 'post',
+    data
+  })
+}
+
+export function getList(data) {
   // 活动列表
   return request({
     url: 'news/index',

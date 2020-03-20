@@ -11,8 +11,29 @@
 </template>
 
 <script>
+	import {newInc} from '@/api/api.js'
 export default {
 	props:["bannerData"],
+	methods:{
+		gotoBanner(banner){
+			if (banner.href !="") {
+				window.location.href =banner.href
+				newInc({
+					id:banner.id
+				}).then(res=>{
+					console.log(res)
+				})
+			}else{
+				this.$router.push({
+				  path: "/findDetails",
+				  query: {
+				    id: banner.id
+				  }
+				})
+			}
+		}
+		
+	}
 };
 </script>
 
@@ -28,4 +49,16 @@ export default {
 		border-radius: 12px;
 	}
 }	
+@media (min-width:750px) {
+	.bannerId{
+		// width: 90%;
+		height: 146px;
+		margin-top:12.5px;
+		img{
+			width: 100%;
+			height: 100%;
+			border-radius: 12px;
+		}
+	}	
+}
 </style>

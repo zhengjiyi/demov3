@@ -11,7 +11,15 @@ const routes = [{
 		path: "/home",
 		name: "/home",
 		component: () => import("@/views/Home.vue"),
-		 meta: { keepAlive: true,}
+		meta: { keepAlive: true, y0: 0, y1: 0, y2: 0 },
+		children: [
+			{
+			  path: "/homeTab",
+			  name: "homeTab",
+			  // component: Connections,
+			  meta: { keepAlive: true, y0: 0, y1: 0, y2: 0 }
+			},
+		],
 	},
 	{
 		path: "/investment",
@@ -35,6 +43,18 @@ const routes = [{
 		path: "/register",
 		name: "/register",
 		component: () => import("@/views/register.vue"),
+		meta: { keepAlive: false,}
+	},
+	{
+		path: "/findDetails",
+		name: "/findDetails",
+		component: () => import("@/views/FindDetails.vue"),
+		meta: { keepAlive: false,}
+	},
+	{
+		path: "/details",
+		name: "/details",
+		component: () => import("@/views/InvestmentDetails.vue"),
 		meta: { keepAlive: false,}
 	},
 

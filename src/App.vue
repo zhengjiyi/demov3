@@ -110,4 +110,44 @@ export default{
 
 <style lang="less">
 @import "//at.alicdn.com/t/font_1582608_59vhu9sb4qg.css";	
+@media (min-width: 750px) {
+  .page {
+    left: 0;
+    width: 375px;
+    right: 0;
+    padding-top: 46px;
+    margin: auto;
+  }
+
+  .textarea {
+    textarea {
+      border-radius: 5px;
+      padding: 10px;
+    }
+  }
+
+  .van-overlay {
+    max-width: 375px;
+    right: 0;
+    margin: auto;
+  }
+
+  .van-dialog {
+    max-width: 400px;
+  }
+
+  div.van-image-preview {
+    width: 375px;
+    left: 50%;
+    margin-left: -375px;
+  }
+
+  .van-sticky.van-sticky--fixed {
+    width: 375px;
+    left: 50%;
+    margin-left: -375px;
+  }
+
+  
+}
 </style>

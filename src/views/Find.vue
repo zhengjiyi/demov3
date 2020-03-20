@@ -1,31 +1,37 @@
 <template>
 	<div>
 		<BannerSwiper :bannerData="bannerData"/>
+		<FindItem :newsArr="newsArr"/>
 	</div>
 </template>
 
 <script>
 import BannerSwiper from "@/components/BannerSwiper.vue";
-import {getNews} from "@/api/api.js"
+import FindItem from "@/components/FindItem.vue";
+import {getList,getNews} from "@/api/api.js"
 import Swiper from "swiper"
 import 'swiper/css/swiper.min.css';
 export default {
   components: {
-    BannerSwiper
+    BannerSwiper,
+	FindItem
   },
   data(){
   	return{
-  		bannerData:[]
+  		bannerData:[],
+		newsArr:[]
   	}  
   },
   created() {
-  	getNews().then(res=>{
+  	getList().then(res=>{
   		this.bannerData = res.data.data
-  		console.log(res.data.data)
   		this.$nextTick(() => {
   			this.bannerSwiper()
   		})
   	})
+	getNews().then(res=>{
+		this.newsArr = res.data.data
+	})
   },
   methods:{
   	  bannerSwiper(){
