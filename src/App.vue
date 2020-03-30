@@ -110,6 +110,15 @@ export default{
 
 <style lang="less">
 @import "//at.alicdn.com/t/font_1582608_59vhu9sb4qg.css";	
+.x{
+	width:3px;
+	height:17px;
+	background:rgba(222,177,86,1);
+	border-radius:1.5px;
+	display: inline-block;
+	margin-left:10px;
+	margin-right:5px;
+}
 @media (min-width: 750px) {
   .page {
     left: 0;
