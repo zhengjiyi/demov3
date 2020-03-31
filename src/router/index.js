@@ -68,6 +68,13 @@ const routes = [{
 		component: () => import("@/views/MyProject.vue"),
 		meta: { keepAlive: false,}
 	},
+	{
+		path: "/submintbp",
+		name: "/submintbp",
+		component: () => import("@/views/SubmintBp.vue"),
+		meta: { keepAlive: false,}
+	},
+	
 	
 
 ];
