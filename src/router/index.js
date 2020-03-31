@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-
 Vue.use(VueRouter);
 
 const routes = [{
@@ -58,13 +57,30 @@ const routes = [{
 		meta: { keepAlive: false,}
 	},
 	{
+<<<<<<< HEAD
 		path: "/submintBp",
 		name: "/submintBp",
 		component: () => import("@/views/SubmintBp.vue"),
 		meta: { keepAlive: false,}
 	},
 	
+=======
+		path: "/bp",
+		name: "/bp",
+		component: () => import("@/views/BpDetails.vue"),
+		meta: { keepAlive: false,}
+	},
+	{
+		path: "/project",
+		name: "/project",
+		component: () => import("@/views/MyProject.vue"),
+		meta: { keepAlive: false,}
+	},
+	
+
+>>>>>>> 65e431b2f88359d062453b67fd44971c214b88cc
 ];
+
 
 const router = new VueRouter({
 	mode: "history",
