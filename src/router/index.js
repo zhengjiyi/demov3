@@ -57,14 +57,6 @@ const routes = [{
 		meta: { keepAlive: false,}
 	},
 	{
-<<<<<<< HEAD
-		path: "/submintBp",
-		name: "/submintBp",
-		component: () => import("@/views/SubmintBp.vue"),
-		meta: { keepAlive: false,}
-	},
-	
-=======
 		path: "/bp",
 		name: "/bp",
 		component: () => import("@/views/BpDetails.vue"),
@@ -78,7 +70,6 @@ const routes = [{
 	},
 	
 
->>>>>>> 65e431b2f88359d062453b67fd44971c214b88cc
 ];
 
 

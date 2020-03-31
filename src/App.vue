@@ -57,11 +57,7 @@ export default{
 	    }
 	
 	  } else {
-<<<<<<< HEAD
-	     localStorage.setItem("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODQ3NjM1MDQsImV4cCI6MTU4NDc5OTUwNCwidXNlcl9pZCI6NH0.T03lpI3wVPNyt7k77YWQygIGOCwDH6Tz9tKgbRNV524"); //109 需求  103 专家
-=======
 	     localStorage.setItem("token",1); //109 需求  103 专家
->>>>>>> 65e431b2f88359d062453b67fd44971c214b88cc
 	    // window.location.href ="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx14bd7709ff067c4f&redirect_uri=http%3A%2F%2Fzhongcheng.demo.c3w.com.cn%2F%23%2F&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect"
 	  }
 	
