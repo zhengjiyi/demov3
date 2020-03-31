@@ -7,11 +7,11 @@
 				    round
 				    width="80"
 				    height="80"
-				    src="https://img.yzcdn.cn/vant/cat.jpeg"
+				    :src="info.avatar"
 				  />
 				  <div class="head">
-					  <p>122121</p>
-					  <p>213123132</p>
+					  <p>{{info.nickname}}</p>
+					  <p>{{info.phone}}</p>
 				  </div>
 				  <div class="xg">
 					  修改>
@@ -48,12 +48,14 @@
 
 <script>
 import Contact from "@/components/Contact"	
+import {getUser} from "@/api/api"
 export default{
 	components:{
 		Contact
 	},
 	data(){
 		return{
+			info:[],
 			showMoel:false,
 			data:[
 				{
@@ -76,7 +78,11 @@ export default{
 		}
 	},
 	created() {
-		document.body.style.backgroundColor="#f8f8fa"
+		// document.body.style.backgroundColor="#f8f8fa"
+		getUser().then(res=>{
+			console.log(res)
+			this.info =  res.data.date
+		})
 	},
 	methods:{
 		show(index){
@@ -85,6 +91,8 @@ export default{
 				this.showMoel = true
 			}else if(index == 2){
 				this.$refs["showContact"].show()
+			}else if(index == 0){
+				this.$router.push("/project")
 			}
 		}
 	}
@@ -151,5 +159,65 @@ export default{
 .iconfenxiang{
 	color: #E3417B;
 }
-
+@media (min-width:750px) {
+	.flex{
+		display: flex;
+		justify-content: start;
+		align-items: center;
+		position: relative;
+	}	
+	.head{
+		margin-left: 10px;
+	}
+	.xg{
+		float: right;
+		position: absolute;
+		right: 0;
+	}
+	.van-grid-item__content{
+		border-radius: 15px;
+	}
+	.usr-p{
+		margin-top: 80px;
+		span{
+			vertical-align: middle;
+		}
+	}
+	.shaerBox{
+		width:243px;
+		height:364px;
+		background:rgba(255,255,255,1);
+	}
+	.shaerp{
+		font-size:15px;
+		font-weight:bold;
+		color:rgba(68,68,68,1);
+		text-align: center;
+	}
+	.shaer-img{
+		display:block;
+		width: 90%;
+		height: 273px;
+		margin:0 auto;
+	}
+	.clone{
+		position:relative;
+		top: 20px;
+	}
+	.frid_item .iconfont{
+		font-size: 26px;
+	}
+	.iconxiangmu{
+		color: #25A975;
+	}
+	.iconguanyu{
+		color: #854AC2;
+	}
+	.iconlianxi{
+		color: #EDCB4F;
+	}
+	.iconfenxiang{
+		color: #E3417B;
+	}
+}
 </style>

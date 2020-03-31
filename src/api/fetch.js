@@ -10,7 +10,7 @@ const fetch = axios.create({
 
 // request拦截器
 fetch.interceptors.request.use((config)=>{
-	if (config.method === "post") {
+	if (config.method === "post" || config.method === "get") {
 	  config.headers['token'] = localStorage.getItem("token")
 	}
 	return config;

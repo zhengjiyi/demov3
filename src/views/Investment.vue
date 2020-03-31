@@ -1,5 +1,13 @@
 <template>
 	<div>
+		<van-row type="flex" justify="space-between" class="celbox">
+			<van-col span="9"  class="sleck van-ellipsis">
+				全部领域
+				<i class="iconfont iconxia"></i>
+			</van-col>
+			<van-col span="9" class="sleck van-ellipsis">全部地区<i class="iconfont iconxia"></i></van-col>
+			<van-col span="3">搜索<i class="iconfont iconxia"></i></van-col>
+		</van-row>
 		<van-list v-model="isUpLoading" :finished="upFinished" :immediate-check="false" :offset="10" finished-text="－已无更多内容－"
 		 @load="onLoadList">
 			<InvestmentItem :newsArr="newsArr" />
@@ -79,6 +87,20 @@
 </script>
 
 <style scoped>
+.sleck {
+	/* height:30px;
+line-height: 30px; */
+	background: rgba(237, 237, 237, 1);
+	border-radius:10px;
+	text-align: center;
+	background: #EDEDED;
+	padding: 5px 0;
+	font-size: 14px;
+}
+.celbox {
+	margin: 0 15px;
+	padding: 15px 0;
+}	
 .page{
 	margin-bottom: 60px;
 }	

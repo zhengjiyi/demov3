@@ -22,15 +22,20 @@
 				  <p>投资偏好：</p>
 				  <div class="company_desc" v-html="detail.stage_desc"></div>
 			  </div>
-			  <van-button type="default" class="newBtn">联系平台</van-button>
+			  <van-button type="default" class="newBtn" @click="contact">联系平台</van-button>
 		  </van-col>
 		</van-row>
+		<Contact ref="showContact"/>
 	</div>
 </template>
 
 <script>
 import {investorDetails} from "@/api/api.js"	
+import Contact from "@/components/Contact"
 export default{
+	components:{
+		Contact
+	},
 	data(){
 		return{
 			detail:[]
@@ -47,6 +52,9 @@ export default{
 	  onClickLeft() {
 			this.$router.back()
 	  },
+	  contact(){
+		this.$refs["showContact"].show()  
+	  }
 	},
 }
 </script>

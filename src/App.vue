@@ -16,6 +16,7 @@
 <script>
 import {geturl,getlogin} from "@/api/api.js"	
 import TabbarLayout from "@/components/TabbarLayout"	
+import {initJsSDK} from "./wechat.js"
 export default{
 	components:{
 		TabbarLayout
@@ -26,6 +27,7 @@ export default{
 	  };
 	},
 	created() {
+	  initJsSDK()
 	  let _than = this;
 	  var ua = navigator.userAgent.toLowerCase();
 	  //判断是不是微信环境
@@ -55,7 +57,7 @@ export default{
 	    }
 	
 	  } else {
-	     localStorage.setItem("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODQ2MTA1ODMsImV4cCI6MTU4NDY0NjU4MywidXNlcl9pZCI6NH0.7UkIIzPsqkZ7ZospdDlKURQZWv8P4jS0dKl0DPUDMdM"); //109 需求  103 专家
+	     localStorage.setItem("token",1); //109 需求  103 专家
 	    // window.location.href ="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx14bd7709ff067c4f&redirect_uri=http%3A%2F%2Fzhongcheng.demo.c3w.com.cn%2F%23%2F&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect"
 	  }
 	
@@ -120,6 +122,15 @@ export default{
 	margin-right:5px;
 }
 @media (min-width: 750px) {
+	.x{
+		width:3px;
+		height:17px;
+		background:rgba(222,177,86,1);
+		border-radius:1.5px;
+		display: inline-block;
+		margin-left:10px;
+		margin-right:5px;
+	}
   .page {
     left: 0;
     width: 375px;

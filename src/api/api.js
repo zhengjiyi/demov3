@@ -1,5 +1,14 @@
 import request from '@/api/fetch'
 
+export function bpInfo(data) {
+  // bp
+  return request({
+    url: 'bp/info',
+    method: 'get',
+    params: data
+  })
+}
+
 export function getHome(data) {
   // 首页接口
   return request({
@@ -91,6 +100,24 @@ export function getList(data) {
   })
 }
 
+export function getUserBp(data) {
+  // 我的项目
+  return request({
+    url: 'user/getUserBp',
+    method: 'post',
+    data
+  })
+}
+
+export function getUser(data) {
+//个人信息
+  return request({
+    url: 'user/getUser',
+    method: 'get',
+    params: data
+  })
+}
+
 export function getSignPackage(data) {
   // 获取微信签名
   return request({
@@ -109,10 +136,21 @@ export function geturl(data) {
   })
 }
 
+
+
 export function getlogin(data) {
 //登录
   return request({
     url: 'login/login',
+    method: 'get',
+    params: data
+  })
+}
+
+export function checkRegist(data) {
+//是否注册
+  return request({
+    url: 'user/checkRegist',
     method: 'get',
     params: data
   })

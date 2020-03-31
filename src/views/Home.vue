@@ -1,6 +1,15 @@
 <template>
   <div class="home">
     <BannerSwiper :bannerData="bannerData"/>
+	<van-row type="flex" justify="space-around">
+	  <van-col span="23">
+		  <div class="box-w">
+			  <p>喜讯</p>
+			  <span class="x"></span>
+			  <NotiBar :goodsArr="goodsArr"/>
+		  </div>
+	  </van-col>
+	</van-row>
 	<van-tabs @change="onTabChange" v-model="activeTabIndex" line-width="50px" title-inactive-color="#999999" title-active-color="#444" @click="seltIndex">
 	  <van-tab title="全部">
 		  <van-list
@@ -41,6 +50,7 @@
 
 <script>
 import BannerSwiper from "@/components/BannerSwiper.vue";
+import NotiBar from "@/components/NotiBar.vue";
 import Item from "@/components/Item.vue";
 import {getHome,getBP} from "@/api/api.js"
 import Swiper from "swiper"
@@ -49,13 +59,15 @@ export default {
   name: "Home",
   components: {
     BannerSwiper,
-	Item
+	Item,
+	NotiBar
   },
   data(){
   	return{
 		activeTabIndex: 0,
   		bannerData:[],
 		dataArr:[],
+		goodsArr:[],
 		num:0,
 		pageSize: 100, // 每页条数
 		pageIndex: 1, // 页码
@@ -69,6 +81,7 @@ export default {
   created() {
   	getHome().then(res=>{
   		this.bannerData = res.data.data.banner
+		this.goodsArr = res.data.data.goods_news
   		this.$nextTick(() => {
   			this.bannerSwiper()
   		})
@@ -114,6 +127,16 @@ export default {
   	  			el: '.swiper-pagination',
   	  		},
   	  	});
+		new Swiper(".NotiBar", {
+			 direction: 'vertical', 
+			loop: true, 
+			centeredSlides: true, 
+			autoplay: {
+				delay: 2500,
+				stopOnLastSlide: false,
+				disableOnInteraction: false,
+			},
+		});
   	  },
 	  seltIndex(name){
 		  this.num = name
@@ -192,6 +215,11 @@ export default {
 <style scoped lang="less">
 .home{
 	margin-bottom:60px;
+}
+.box-w{
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 @media (min-width:750px) {
 	.home{

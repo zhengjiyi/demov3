@@ -2,15 +2,20 @@
 	<div>
 		<van-cell >
 		  <template slot="title">
-				<van-row  v-for="(item,index) in dataArr" :key="index" class="bor_top">
+				<van-row  v-for="(item,index) in dataArr" :key="index" class="bor_top" @click="bpIndex(item.id)">
 				  <van-col span="24">
-					  <p>
+					  <p class="bt">
 						  <van-tag v-if="item.stage_name" color="#FEF3DC">{{item.stage_name}}</van-tag>
 						  <span class="title">{{item.title}}</span>
 					   </p>
 					  <p class="nth_p">
 						  <span class="capital_name">{{item.capital_name}}</span>
-						  <van-tag   v-for="(field,index) in item.field_name" :key="index" class="tang2" color="#FFF3EB">{{field}}</van-tag>
+						  <van-tag  v-for="(field,index) in item.field_name" :key="index" class="tang2" color="#FFF3EB">{{field}}</van-tag>
+						  <van-tag v-if="item.status == 0" color="#1767E7">审查中</van-tag>
+						  <van-tag v-if="item.status == 1" color="#9FB534">洽谈中</van-tag>
+						  <van-tag v-if="item.status == 2" color="#9FB534">对接中</van-tag>
+						  <van-tag v-if="item.status == 3" color="#494949">融资失败</van-tag>
+						  <van-tag v-if="item.status == 4" color="#494949">融资失败</van-tag>
 					  </p>
 					  <p class="footer_p">
 						<span>{{item.add_time}}</span>  
@@ -26,6 +31,12 @@
 <script>
 export default{
 	props:["dataArr"],
+	methods:{
+		bpIndex(id){
+			console.log(id)
+			this.$router.push({path:"/bp",query:{id:id}})
+		}
+	}
 }	
 </script>
 
@@ -33,7 +44,7 @@ export default{
 .title{
 	margin-left: 7px;
 }
-.van-tag{
+.bt .van-tag{
 	color: #DEA32C;
 }	
 .tang2{

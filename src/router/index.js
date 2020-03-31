@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-
 Vue.use(VueRouter);
 
 const routes = [{
@@ -57,8 +56,22 @@ const routes = [{
 		component: () => import("@/views/InvestmentDetails.vue"),
 		meta: { keepAlive: false,}
 	},
+	{
+		path: "/bp",
+		name: "/bp",
+		component: () => import("@/views/BpDetails.vue"),
+		meta: { keepAlive: false,}
+	},
+	{
+		path: "/project",
+		name: "/project",
+		component: () => import("@/views/MyProject.vue"),
+		meta: { keepAlive: false,}
+	},
+	
 
 ];
+
 
 const router = new VueRouter({
 	mode: "history",
