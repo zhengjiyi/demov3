@@ -57,7 +57,13 @@ const routes = [{
 		component: () => import("@/views/InvestmentDetails.vue"),
 		meta: { keepAlive: false,}
 	},
-
+	{
+		path: "/submintBp",
+		name: "/submintBp",
+		component: () => import("@/views/SubmintBp.vue"),
+		meta: { keepAlive: false,}
+	},
+	
 ];
 
 const router = new VueRouter({

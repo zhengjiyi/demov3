@@ -28,6 +28,17 @@ export function sendSms(data) {
   })
 }
 
+export function postBp(data) {
+  // 提交bp
+  return request({
+    url: 'user/postBp',
+    method: 'post',
+    data
+  })
+}
+
+
+
 export function getArea(data) {
   // 获取省市
   return request({
