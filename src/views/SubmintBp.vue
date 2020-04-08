@@ -1,25 +1,34 @@
 <template>
 	<div>
+		<van-nav-bar
+		  title="提交BP"
+		  left-arrow
+		  @click-left="onClickLeft"
+		/>
 		<van-cell-group>
-		  <van-field v-model="form.title" type="tel" label="项目名称" required/>
+		  <van-field v-model="form.title" type="text" label="项目名称" required/>
 		  <van-field v-model="form.company_name" type="text" label="公司名称" required/>
-		  <van-field v-model="form.logo" type="text" label="上传LOGO" required/>
+		  <van-field v-model="form.logo" type="text" label="上传LOGO" required>
+			  <template slot="button">
+				<Upload @upImgs="upImgs"/>
+			  </template>
+		  </van-field>
 		  <van-cell title="一句话简介" :border="false" required/>
 		  <van-field
 		    v-model="form.one_desc"
 		    type="textarea"
 		    placeholder="写点关于您的事情吧..."
 		  />
-		  <van-field v-model="tel" type="text" label="行业领域" required/>
-		  <van-field v-model="tel" type="text" label="所在城市" required/>
+		  <van-field readonly placeholder="请选择行业领域" v-model="lyName" @click="showLy" type="text" label="行业领域" required/>
+		  <van-field readonly placeholder="请选择所在城市" @click="showArea" v-model="cityName" type="text" label="所在城市" required/>
 		  <van-cell title="公司简介" :border="false" required/>
 		  <van-field
 		    v-model="form.company_desc"
 		    type="textarea"
 		    placeholder="写点关于您的事情吧..."
 		  />
-		  <van-field v-model="form.capital_id" type="text" label="融资需求" required/>
-		  <van-field v-model="form.stage_id" type="text" label="融资阶段" required/>
+		  <van-field readonly @click="showCapital" v-model="form.capital_id" type="text" label="融资需求" required/>
+		  <van-field readonly @click = "showStage" v-model="form.stage_id" type="text" label="融资阶段" required/>
 		  <van-cell title="融资经历" :border="false" required/>
 		  <van-field
 		    v-model="form.financing"
@@ -29,15 +38,34 @@
 		  <van-cell title="商业计划书" :border="false" required/>
 		</van-cell-group>
 		<van-button class="newBtn" type="default" @click="save">保存</van-button>
+		<LyPoup ref="LyPoup" @onConfirm="seleLy"/>
+		<AreaPoup ref="area" @confirm="seletArea"/>
+		<Capital ref="Capital" @confirm="seletCapital"/>
+		<Stage ref="Stage" @confirm="seletStage"/>
 	</div>
 </template>
 
 <script>
 import {postBp} from "@/api/api.js"	
+import LyPoup from "@/components/LyPoup.vue"
+import AreaPoup from "@/components/AreaPoup.vue"
+import Capital from "@/components/Capital.vue"
+import Stage from "@/components/Stage.vue"
+import Upload from "@/components/Upload.vue"
 export default{
+	components:{
+		LyPoup,
+		AreaPoup,
+		Capital,
+		Stage,
+		Upload
+	},
 	data(){
 		return{
+			lyName:"",
+			cityName:"",
 			form:{
+				tel:"",
 				title:"",
 				company_name:"",
 				logo:"",
@@ -55,6 +83,38 @@ export default{
 		}
 	},
 	methods:{
+		onClickLeft(){
+			this.$router.back()
+		},	
+		showLy(){
+			this.$refs["LyPoup"].show()
+		},	
+		seleLy(val,index){
+			console.log(val,index)
+			this.lyName = val
+		},
+		showArea(){
+			this.$refs["area"].show()
+		},
+		seletArea(list,value){
+			console.log(list,value)
+			this.cityName = list.join("")
+		},
+		showCapital(){
+			this.$refs["area"].show()
+		},
+		seletCapital(val,index){
+			console.log(val,index)
+		},
+		showStage(){
+			this.$refs["Stage"].show()
+		},
+		seletStage(val,idx){
+			console.log(val,idx)
+		},
+		upImgs(val){
+			console.log(val)
+		},
 		save(){
 			postBp({
 				field_name: this.form.field_name,
@@ -72,6 +132,20 @@ export default{
 				financing: this.form.financing
 			}).then(res=>{
 				console.log(res)	
+				if(res.status == 1){
+					Dialog.alert({
+					  title: '温馨提示',
+					  message: res.msg
+					}).then(() => {
+					  // on close
+					  this.$router.push("/user")
+					});
+				}else{
+					Dialog.alert({
+					  title: '温馨提示',
+					  message: res.msg
+					})
+				}
 			})
 		}
 	}
@@ -79,6 +153,14 @@ export default{
 </script>
 
 <style scoped>
+.van-nav-bar .van-icon{
+	color: #464F57;
+}	
+.van-nav-bar__title{
+	font-size:17px;
+	font-weight:400;
+	color:rgba(70,79,87,1);
+}	
 .newBtn{
 	width:158px;
 	height:33px;

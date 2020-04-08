@@ -20,7 +20,7 @@ export default {
       idList:[]
     };
   },
-  mounted() {
+  created() {
     getArea().then((res)=>{
       this.dataArr=res.data.data;
       let itemArr = [];

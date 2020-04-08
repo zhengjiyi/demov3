@@ -1,5 +1,41 @@
 import request from '@/api/fetch'
 
+export  function uploadFile({file}) {
+	//上传接口
+  return request({
+    url: 'Upload/upload_file',
+    method: 'post',
+    data:file
+  })
+}
+
+export function getStage(data) {
+  // 融资阶段
+  return request({
+    url: 'index/getStage',
+    method: 'get',
+    params: data
+  })
+}
+
+export function getCapital(data) {
+  // 融资需求
+  return request({
+    url: 'index/getCapital',
+    method: 'get',
+    params: data
+  })
+}
+
+export function getField(data) {
+  // 领域列表
+  return request({
+    url: 'index/getField',
+    method: 'get',
+    params: data
+  })
+}
+
 export function bpInfo(data) {
   // bp
   return request({

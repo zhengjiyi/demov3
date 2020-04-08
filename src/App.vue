@@ -1,15 +1,11 @@
 <template>
   <div id="app">
-    <transition name="van-slide-right">
       <keep-alive>
         <router-view class="page" v-if="this.$route.meta.keepAlive" />
 		<TabbarLayout v-if="this.$route.meta.keepAlive"/>
       </keep-alive>
-    </transition>
-    <transition name="van-slide-right">
       <router-view class="page" v-if="!this.$route.meta.keepAlive" />
 	  <TabbarLayout v-if="this.$route.meta.keepAlive"/>
-    </transition>
   </div>
 </template>
 

@@ -45,7 +45,7 @@ export default {
 }	
 </script>
 
-<style scoped>
+<style>
 .van-nav-bar .van-icon{
 	color: #464F57;
 }	
@@ -53,7 +53,7 @@ export default {
 	font-size:17px;
 	font-weight:400;
 	color:rgba(70,79,87,1);
-}
+}	
 .item_time{
 	font-size:12px;
 	color:rgba(181,181,181,1);

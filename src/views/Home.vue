@@ -45,6 +45,7 @@
 		  </van-list>
 	  </van-tab>
 	</van-tabs>
+	<van-button to="/submintbp" class="newBtn" type="default" >提交BP</van-button>
   </div>
 </template>
 
@@ -221,6 +222,22 @@ export default {
 	justify-content: center;
 	align-items: center;
 }
+.newBtn{
+	width:158px;
+	height:33px;
+	background:rgba(222,177,86,1);
+	border-radius:33px;
+	line-height: 32px;
+	margin:0 auto;
+	color: #fff;
+	display: flex;
+	justify-content: center;
+	font-size: 15px;
+	position: fixed;
+	left: 50%;
+	bottom: 80px;
+	transform: translateX(-50%);
+}	
 @media (min-width:750px) {
 	.home{
 		margin-bottom:60px;

@@ -79,6 +79,9 @@ export default{
 </script>
 
 <style>
+.x{
+	margin-left: 0;
+}
 .details_mj{
 	display: flex;
 	justify-content: space-between;
