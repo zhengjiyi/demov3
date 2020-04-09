@@ -22,7 +22,7 @@ module.exports = {
     proxy: {
       "/api": {
         changeOrigin: true,
-        target: "http://zc.demo.yudw.com/api/",
+        target: "http://zcjf.unspace.cn/api/",
         pathRewrite: {
           "^/api": ""
         }
