@@ -6,6 +6,7 @@
 		    required
 		    label="姓名"
 		    placeholder="请输入用户名"
+			input-align="right"
 		  />
 		  <van-field
 		    v-model="form.phone"
@@ -13,18 +14,21 @@
 		    label="手机号码"
 		    placeholder="请输入手机号"
 			type="number"
+			input-align="right"
 		  />
 		  <van-field
 		    v-model="form.email"
 		    required
 		    label="工作邮箱 "
 		    placeholder="工作邮箱"
+			input-align="right"
 		  />
 		  <van-field
 		    v-model="form.company_name"
 		    required
 		    label="公司名称"
 		    placeholder="公司名称"
+			input-align="right"
 		  />
 		 
 		  <van-field
@@ -33,12 +37,15 @@
 		    label="所在城市"
 		    placeholder="所在城市"
 			@click="showArea"
+			input-align="right"
+			is-link
 		  />
 		  <van-field
 		    v-model="form.position"
 		    required
 		    label="职位"
 		    placeholder="职位"
+			input-align="right"
 		  />
 		  <van-cell title="个人简介" :border="false" />
 		  <van-field
@@ -71,7 +78,7 @@
 		<!-- 每个元素的两侧间隔相等 -->
 		<van-row type="flex" justify="space-around">
 		  <van-col span="6">
-			  <van-button type="default" @click="cancle">取消</van-button>
+			  <van-button type="default" to="/user">取消</van-button>
 		  </van-col>
 		  <van-col span="6">
 			  <van-button type="default" @click="save">保存</van-button>
@@ -83,6 +90,7 @@
 
 <script>
 import {sendSms,saveData} from "@/api/api.js"	
+import {mapActions,mapGetters} from "vuex";	
 import AreaPoup from "@/components/AreaPoup.vue"
 export default{
 	components:{
@@ -106,7 +114,15 @@ export default{
 			}
 		}
 	},
+	computed: {
+		...mapGetters(["userInfo"])
+	},
+	mounted(){
+		this.fetchUserInfo(this.userInfo.id);
+		this.form = this.userInfo
+	},
 	methods:{
+		...mapActions(["fetchUserInfo"]),
 		showArea(){
 			this.$refs["area"].show()
 		},
@@ -160,9 +176,6 @@ export default{
 			})
 			
 		},
-		cancle(){
-			this.$route.push("/home")
-		}
 	}
 }	
 </script>

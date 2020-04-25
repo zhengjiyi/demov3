@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="finddetails">
 		<van-nav-bar
 		  title="发现详情"
 		  left-arrow
@@ -46,6 +46,9 @@ export default {
 </script>
 
 <style>
+.finddetails .desc img,.finddetails .desc video{
+	width: 100%;
+}	
 .van-nav-bar .van-icon{
 	color: #464F57;
 }	

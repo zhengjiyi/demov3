@@ -4,7 +4,7 @@
 	<van-row type="flex" justify="space-around">
 	  <van-col span="23">
 		  <div class="box-w">
-			  <p>喜讯</p>
+			  <p class="xx">喜讯</p>
 			  <span class="x"></span>
 			  <NotiBar :goodsArr="goodsArr"/>
 		  </div>
@@ -221,6 +221,13 @@ export default {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	background-color: #fff;
+	border-radius:7px;
+	margin:20px 0;
+	.xx{
+		width:60px;
+		text-align: center;
+	}
 }
 .newBtn{
 	width:158px;

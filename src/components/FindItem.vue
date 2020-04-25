@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="find">
 		<van-row type="flex" justify="space-around" v-for="(item,index) in newsArr" :key="index" class="item_find" @click="info(item)">
 			<van-col span="22" class="brt">
 				<div class="item_box">

@@ -7,14 +7,14 @@
 				    round
 				    width="80"
 				    height="80"
-				    :src="info.avatar"
+				    :src="userInfo.avatar"
 				  />
 				  <div class="head">
-					  <p>{{info.nickname}}</p>
-					  <p>{{info.phone}}</p>
+					  <p>{{userInfo.nickname}}</p>
+					  <p>{{userInfo.phone}}</p>
 				  </div>
 				  <div class="xg">
-					  修改>
+					  <router-link to="/register">修改></router-link>
 				  </div>
 			  </div>
 		  </van-col>
@@ -47,8 +47,8 @@
 </template>
 
 <script>
+import {mapActions,mapGetters} from "vuex";	
 import Contact from "@/components/Contact"	
-import {getUser} from "@/api/api"
 export default{
 	components:{
 		Contact
@@ -79,12 +79,17 @@ export default{
 	},
 	created() {
 		// document.body.style.backgroundColor="#f8f8fa"
-		getUser().then(res=>{
-			console.log(res)
-			this.info =  res.data.date
-		})
+		// this.getUserInfo()
 	},
+	computed: {
+		...mapGetters(["userInfo"])
+	},
+	mounted(){
+		this.fetchUserInfo(this.userInfo.id);
+		console.log(this.userInfo.nickname)
+	},	
 	methods:{
+		...mapActions(["fetchUserInfo"]),
 		show(index){
 			console.log(index)
 			if(index == 3){
@@ -93,9 +98,12 @@ export default{
 				this.$refs["showContact"].show()
 			}else if(index == 0){
 				this.$router.push("/project")
+			}else if(index == 1){
+				window.location.href = "https://mp.weixin.qq.com/s/-wqjwsU_q-ktkfOI_pQAhw"
 			}
-		}
-	}
+		},
+	},
+	
 }	
 </script>
 

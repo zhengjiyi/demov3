@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { mapGetters} from "vuex";
 import {geturl,getlogin} from "@/api/api.js"	
 import TabbarLayout from "@/components/TabbarLayout"	
 import {initJsSDK} from "./wechat.js"
@@ -23,13 +24,41 @@ export default{
 	  };
 	},
 	created() {
+		if (this.$store.state.userInfo.id) {
+		  this.$store.dispatch("fetchUserInfo", this.$store.state.userInfo.id);
+		}
 	  initJsSDK()
+	  document.body.addEventListener("focusin", () => {
+	    //软键盘弹起事件
+	    /* 获取窗口滚动条高度 */
+	    function getScrollTop() {
+	      let scrollTop = 0;
+	      if (document.documentElement && document.documentElement.scrollTop) {
+	        scrollTop = document.documentElement.scrollTop;
+	      } else if (document.body) {
+	        scrollTop = document.body.scrollTop;
+	      }
+	      return scrollTop;
+	    }
+	  
+	    this.oldScrollTop = getScrollTop() || 0; // 记录当前滚动位置
+	  });
+	  
+	  document.body.addEventListener("focusout", () => {
+	    //软键盘关闭事件
+	    const ua = window.navigator.userAgent;
+	    if (ua.indexOf("iPhone") > 0 || ua.indexOf("iPad") > 0) {
+	      //键盘收起页面空白问题
+	      document.body.scrollTop = this.oldScrollTop;
+	      document.documentElement.scrollTop = this.oldScrollTop;
+	    }
+	  });
 	  let _than = this;
 	  var ua = navigator.userAgent.toLowerCase();
 	  //判断是不是微信环境
 	  if (ua.match(/MicroMessenger/i) == "micromessenger") {
 	    let url = window.location.href;
-	    let huoqutoken = localStorage.getItem("token");
+	    let huoqutoken = sessionStorage.getItem("token");
 	    if (huoqutoken === null || huoqutoken == "" ||	huoqutoken == null ||	huoqutoken == "null" ||	huoqutoken == undefined) {
 	      if (window.location.href.indexOf("code") == 0 || window.location.href.indexOf("code") <= 0) {
 	        geturl({
@@ -43,7 +72,7 @@ export default{
 	          code: code
 	        }).then((res) => {
 	          if (res.data.status == 1) {
-	            localStorage.setItem("token", res.data.data.token);
+	            sessionStorage.setItem("token", res.data.data.token);
 	          }
 	        })
 	      }
@@ -53,37 +82,10 @@ export default{
 	    }
 	
 	  } else {
-	     localStorage.setItem("token",1); //109 需求  103 专家
+	     sessionStorage.setItem("token",1); 
 	    // window.location.href ="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx14bd7709ff067c4f&redirect_uri=http%3A%2F%2Fzhongcheng.demo.c3w.com.cn%2F%23%2F&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect"
 	  }
 	
-	},
-	moutend(){
-		document.body.addEventListener("focusin", () => {
-		  //软键盘弹起事件
-		  /* 获取窗口滚动条高度 */
-		  function getScrollTop() {
-		    let scrollTop = 0;
-		    if (document.documentElement && document.documentElement.scrollTop) {
-		      scrollTop = document.documentElement.scrollTop;
-		    } else if (document.body) {
-		      scrollTop = document.body.scrollTop;
-		    }
-		    return scrollTop;
-		  }
-		
-		  this.oldScrollTop = getScrollTop() || 0; // 记录当前滚动位置
-		});
-		
-		document.body.addEventListener("focusout", () => {
-		  //软键盘关闭事件
-		  const ua = window.navigator.userAgent;
-		  if (ua.indexOf("iPhone") > 0 || ua.indexOf("iPad") > 0) {
-		    //键盘收起页面空白问题
-		    document.body.scrollTop = this.oldScrollTop;
-		    document.documentElement.scrollTop = this.oldScrollTop;
-		  }
-		});
 	},
 	methods: {
 	  getQueryString(name) {
@@ -102,7 +104,10 @@ export default{
 	      }
 	    })
 	  }
-	}
+	},
+	computed: {
+		...mapGetters(["userInfo"])
+	},
 }	
 </script>
 

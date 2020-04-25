@@ -4,7 +4,6 @@ export function initJsSDK(param) {
   // console.log(param)
   let url = window.location.href
   getSignPackage({url:url}).then(res => {
-	  console.log(res)
     wx.config({
       debug: false, // 开启调试模式
       appId: res.data.data.appId, // 必填，公众号的唯一标识

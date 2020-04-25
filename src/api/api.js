@@ -1,5 +1,13 @@
 import request from '@/api/fetch'
 
+export function subscribe(data) {
+  return request({
+    url: 'config/subscribe',
+    method: 'get',
+    params: data
+  })
+}
+
 export  function uploadFile({file}) {
 	//上传接口
   return request({

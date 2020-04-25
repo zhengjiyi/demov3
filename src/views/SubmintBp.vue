@@ -8,7 +8,7 @@
 		<van-cell-group>
 		  <van-field v-model="form.title" type="text" label="项目名称" required/>
 		  <van-field v-model="form.company_name" type="text" label="公司名称" required/>
-		  <van-field v-model="form.logo" type="text" label="上传LOGO" required>
+		  <van-field  type="text" label="上传LOGO" required>
 			  <template slot="button">
 				<Upload @upImgs="upImgs"/>
 			  </template>
@@ -19,16 +19,16 @@
 		    type="textarea"
 		    placeholder="写点关于您的事情吧..."
 		  />
-		  <van-field readonly placeholder="请选择行业领域" v-model="lyName" @click="showLy" type="text" label="行业领域" required/>
-		  <van-field readonly placeholder="请选择所在城市" @click="showArea" v-model="cityName" type="text" label="所在城市" required/>
+		  <van-field readonly placeholder="请选择行业领域" v-model="lyName" @click="showLy" type="text" is-link label="行业领域" required/>
+		  <van-field readonly placeholder="请选择所在城市" @click="showArea" v-model="cityName" type="text" is-link label="所在城市" required/>
 		  <van-cell title="公司简介" :border="false" required/>
 		  <van-field
 		    v-model="form.company_desc"
 		    type="textarea"
 		    placeholder="写点关于您的事情吧..."
 		  />
-		  <van-field readonly @click="showCapital" v-model="form.capital_id" type="text" label="融资需求" required/>
-		  <van-field readonly @click = "showStage" v-model="form.stage_id" type="text" label="融资阶段" required/>
+		  <van-field readonly @click="showCapital" v-model="form.capital_id" is-link type="text" label="融资需求" required/>
+		  <van-field readonly @click = "showStage" v-model="form.stage_id" is-link type="text" label="融资阶段" required/>
 		  <van-cell title="融资经历" :border="false" required/>
 		  <van-field
 		    v-model="form.financing"
@@ -114,6 +114,7 @@ export default{
 		},
 		upImgs(val){
 			console.log(val)
+			this.form.logo = val
 		},
 		save(){
 			postBp({
@@ -135,15 +136,15 @@ export default{
 				if(res.status == 1){
 					Dialog.alert({
 					  title: '温馨提示',
-					  message: res.msg
+					  message: res.data.msg
 					}).then(() => {
 					  // on close
 					  this.$router.push("/user")
 					});
 				}else{
-					Dialog.alert({
+					this.$dialog.alert({
 					  title: '温馨提示',
-					  message: res.msg
+					  message: res.data.msg
 					})
 				}
 			})
@@ -167,7 +168,7 @@ export default{
 	background:rgba(222,177,86,1);
 	border-radius:33px;
 	line-height: 32px;
-	margin:0 auto;
+	margin:30px auto;
 	color: #fff;
 	display: flex;
 	justify-content: center;

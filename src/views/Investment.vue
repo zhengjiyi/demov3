@@ -8,7 +8,7 @@
 			<van-col span="9" class="sleck van-ellipsis">全部地区<i class="iconfont iconxia"></i></van-col>
 			<van-col span="3">搜索<i class="iconfont iconxia"></i></van-col>
 		</van-row>
-		<van-list v-model="isUpLoading" :finished="upFinished" :immediate-check="false" :offset="10" finished-text="－已无更多内容－"
+		<van-list v-model="isUpLoading" :finished="upFinished" :immediate-check="false" :offset="10" finished-text="－暂无更多内容－"
 		 @load="onLoadList">
 			<InvestmentItem :newsArr="newsArr" />
 		</van-list>
@@ -27,7 +27,7 @@
 		data() {
 			return {
 				newsArr: [],
-				pageSize: 300, // 每页条数
+				pageSize: 20, // 每页条数
 				pageIndex: 1, // 页码
 				isDownLoading: false, // 下拉刷新
 				isUpLoading: false, // 上拉加载

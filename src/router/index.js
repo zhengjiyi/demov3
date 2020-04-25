@@ -74,8 +74,6 @@ const routes = [{
 		component: () => import("@/views/SubmintBp.vue"),
 		meta: { keepAlive: false,}
 	},
-	
-	
 
 ];
 
