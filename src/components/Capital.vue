@@ -16,7 +16,6 @@ export default{
 	},
 	created() {
 		getCapital().then(res=>{
-			console.log(res.data.data[0].name)
 			this.arr = res.data.data
 			this.columns = res.data.data.map(item => item.name)
 		})
@@ -32,8 +31,7 @@ export default{
 		  this.visible = false;
 		},
 		onConfirm(val,idx) {
-		  console.log(val,idx)
-		  this.$emit("confirm", val,idx);
+		  this.$emit("confirm",val,idx);
 		  this.hide();
 		},
 	}

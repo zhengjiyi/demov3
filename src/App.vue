@@ -122,6 +122,9 @@ export default{
 	margin-left:10px;
 	margin-right:5px;
 }
+.van-nav-bar .van-icon{
+	color: #464F57 !important;
+}	
 @media (min-width: 750px) {
 	.x{
 		width:3px;

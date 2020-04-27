@@ -28,8 +28,9 @@
 				uploadFile({
 					file: formData
 				}).then((res) => {
-					if (res.data.status == 1) {
 						this.$emit("upImgs", res.data.data)
+					if (res.data.status == 1) {
+						console.log(res.data.data)
 						// this.$toast(res.data.msg)
 					} else {
 						this.$toast(res.data.msg)

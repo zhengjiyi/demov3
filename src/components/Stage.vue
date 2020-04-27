@@ -16,7 +16,6 @@ export default{
 	},
 	created() {
 		getStage().then(res=>{
-			console.log(res)
 			this.arr = res.data.data
 			this.columns = res.data.data.map(item => item.name)
 		})
@@ -32,7 +31,6 @@ export default{
 		  this.visible = false;
 		},
 		onConfirm(val,idx) {
-		  console.log(val,idx)
 		  this.$emit("confirm", val,idx);
 		  this.hide();
 		},

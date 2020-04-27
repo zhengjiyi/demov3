@@ -31,8 +31,8 @@ export default{
 		  this.visible = false;
 		},
 		onConfirm(val,idx) {
-		  console.log(val,idx)
-		  this.$emit("confirm", val,idx);
+			console.log(val,idx)
+		  this.$emit("confirm",val,idx);
 		  this.hide();
 		},
 	}

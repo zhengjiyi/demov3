@@ -1,15 +1,20 @@
 <template>
-	<div>
+	<div class="reg">
+		<van-nav-bar
+		  title="我的名片"
+		  left-arrow
+		  @click-left="onClickLeft"
+		/>
 		<van-cell-group>
 		  <van-field
-		    v-model="form.nickname"
+		    v-model="from.nickname"
 		    required
 		    label="姓名"
 		    placeholder="请输入用户名"
 			input-align="right"
 		  />
 		  <van-field
-		    v-model="form.phone"
+		    v-model="from.phone"
 		    required
 		    label="手机号码"
 		    placeholder="请输入手机号"
@@ -17,14 +22,14 @@
 			input-align="right"
 		  />
 		  <van-field
-		    v-model="form.email"
+		    v-model="from.email"
 		    required
 		    label="工作邮箱 "
 		    placeholder="工作邮箱"
 			input-align="right"
 		  />
 		  <van-field
-		    v-model="form.company_name"
+		    v-model="from.company_name"
 		    required
 		    label="公司名称"
 		    placeholder="公司名称"
@@ -41,7 +46,7 @@
 			is-link
 		  />
 		  <van-field
-		    v-model="form.position"
+		    v-model="from.position"
 		    required
 		    label="职位"
 		    placeholder="职位"
@@ -50,14 +55,14 @@
 		  <van-cell title="个人简介" :border="false" />
 		  <van-field
 		    class="textarea"
-		    v-model="form.desc"
+		    v-model="from.desc"
 		    type="textarea"
 		    placeholder="写点关于您的事情吧..."
 		  />
 		</van-cell-group>
 		<van-cell-group class="cell-group">
 		  <van-field
-		    v-model="form.sms"
+		    v-model="code"
 		    center
 		    clearable
 		    label="短信验证码"
@@ -77,11 +82,11 @@
 		</van-cell-group>
 		<!-- 每个元素的两侧间隔相等 -->
 		<van-row type="flex" justify="space-around">
-		  <van-col span="6">
-			  <van-button type="default" to="/user">取消</van-button>
-		  </van-col>
-		  <van-col span="6">
-			  <van-button type="default" @click="save">保存</van-button>
+		  <van-col span="24">
+			  <div class="regbox">
+				  <van-button class="cancle" type="default" to="/user">取消</van-button>
+				   <van-button class="save" type="default" @click="save">保存</van-button>
+			  </div>
 		  </van-col>
 		</van-row>
 		<AreaPoup ref="area" @confirm="seletArea"/>
@@ -90,7 +95,7 @@
 
 <script>
 import {sendSms,saveData} from "@/api/api.js"	
-import {mapActions,mapGetters} from "vuex";	
+import {mapActions,mapGetters, mapState } from "vuex";	
 import AreaPoup from "@/components/AreaPoup.vue"
 export default{
 	components:{
@@ -100,26 +105,27 @@ export default{
 		return{
 			smsT: 0,
 			cityName:null,
-			form:{
+			code:"",
+			sms:"",
+			from:{
 				nickname:"",
 				phone:"",
 				email:"",
 				company_name:"",
 				position:"",
 				city:"",
-				code:"",
 				desc:"",
 				avatar:"",
-				sms:""
 			}
 		}
 	},
 	computed: {
-		...mapGetters(["userInfo"])
+		...mapGetters(["userInfo"]),
 	},
-	mounted(){
-		this.fetchUserInfo(this.userInfo.id);
-		this.form = this.userInfo
+	async mounted(){
+		await this.$store.dispatch("fetchUserInfo", this.userInfo.id);
+		this.cityName = this.userInfo.city_name
+		this.from = this.userInfo
 	},
 	methods:{
 		...mapActions(["fetchUserInfo"]),
@@ -129,15 +135,15 @@ export default{
 		seletArea(list,value){
 			console.log(list,value)
 			this.cityName = list.join("")
-			this.form.city = value
+			this.from.city = value
 		},
 		getSms() {
-			if (!this.form.phone) {
+			if (!this.from.phone) {
 			  this.$toast("请先输入手机号码");
 			  return;
 			}
 			sendSms({
-				mobile: this.form.phone
+				mobile: this.from.phone
 			}).then(res=>{
 				console.log(res)
 			})
@@ -150,16 +156,17 @@ export default{
 			}, 1000);
 		},
 		save(){
+			console.log(this.code)
 			saveData({
-				nickname: this.form.nickname,
-				phone: this.form.phone,
-				email: this.form.email,
-				company_name: this.form.company_name,
-				position: this.form.position,
-				city: this.form.city,
-				code: this.form.code,
-				desc: this.form.desc.replace(/\n/g, "<br/>").replace(/\s/g, "&nbsp;"),
-				city_name:this.form.city_name
+				nickname: this.from.nickname,
+				phone: this.from.phone,
+				email: this.from.email,
+				company_name: this.from.company_name,
+				position: this.from.position,
+				city: this.from.city,
+				code: this.code,
+				desc: this.from.desc.replace(/\n/g, "<br/>").replace(/\s/g, "&nbsp;"),
+				city_name:this.from.city_name
 			}).then(res=>{
 				if(res.data.status == 1){
 					this.$dialog.alert({
@@ -176,9 +183,38 @@ export default{
 			})
 			
 		},
+		onClickLeft() {
+			this.$router.back()
+		},
 	}
 }	
 </script>
 
-<style>
+<style lang="less">
+.van-button--default{
+	background-color:inherit;
+}
+.cancle{
+	width:130px;
+	height:33px !important;
+	line-height: 1 !important;
+	border-radius:16px !important;
+	background:rgba(153,153,153,1);
+	color: #fff;
+}
+.save{
+	width:130px;
+	height:33px !important;
+	line-height: 1 !important;
+	border-radius:16px !important;
+	background:rgba(222,177,86,1);
+	color: #fff !important;
+}	
+.regbox{
+	display: flex;
+	justify-content: space-around;
+	margin:20px 0;
+}
+.reg .van-cell{
+}
 </style>

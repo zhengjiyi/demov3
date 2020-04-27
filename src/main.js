@@ -11,6 +11,7 @@ Vue.config.productionTip = false;
 import {checkRegist,subscribe} from "./api/api.js"
 
 router.onReady(async (to, from) => {
+	 store.commit("setFromRoute", from);
 	subscribe().then(res=>{
 		// if(res.data.data.subscribe == 0){
 		// 	window.location.replace("https://mp.weixin.qq.com/s/e_kFlAUdtNv_6zEe3JxNWA")
@@ -19,6 +20,7 @@ router.onReady(async (to, from) => {
 });
 
 router.beforeEach((to, from, next) => {
+	store.commit("setFromRoute", from);
   if(to.meta.requireAuth){
   	checkRegist().then(res=>{
   		if(res.data.data == 0){

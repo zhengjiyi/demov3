@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state: {
 	  userInfo:{
 		id:userId
-	  }
+	  },
+	  from: undefined
   },
   getters:{
 	  userInfo: state => {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
 	  updateUserInfo: (state, payload) => {
 	    state.userInfo = payload;
 	  },
+	  setFromRoute: (state, payload) => {
+	    state.from = payload;
+	  }
   },
   actions: {
 	  async fetchUserInfo({commit}){
